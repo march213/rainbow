@@ -83,7 +83,7 @@ function createPath({ data, width, height, yRange }: CallbackType): PathData {
     };
   }
 
-  const points: Point[] = [];
+  const points: (Point & { originalX: number; originalY: number })[] = [];
 
   const { greatestY, smallestY } = findYExtremes(data.points) as {
     greatestY: Point;
@@ -94,6 +94,8 @@ function createPath({ data, width, height, yRange }: CallbackType): PathData {
 
   for (let point of data.points) {
     points.push({
+      originalX: point.x,
+      originalY: point.y,
       x: scaleX(point.x),
       y: scaleY(point.y),
     });
@@ -149,7 +151,7 @@ export const ChartPathProvider = React.memo<ChartPathProviderProps>(
 
     // position of the dot
     const positionX = useSharedValue(0);
-    const positionY = useSharedValue(0);
+    const positionY = useSharedValue(-1);
 
     // componentDidMount hack
     const initialized = useRef(false);

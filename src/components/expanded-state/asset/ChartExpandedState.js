@@ -137,7 +137,7 @@ function truncate(text) {
   const firstParagraph = text?.split('\n')[0];
   const first4Sentences = text?.split('.').slice(0, 4).join('.') + '.';
   const shorterOne =
-    first4Sentences.length < firstParagraph.length
+    first4Sentences?.length < firstParagraph?.length
       ? first4Sentences
       : firstParagraph;
   // If there is not much to expand, return the whole text
@@ -348,10 +348,10 @@ export default function ChartExpandedState({ asset }) {
               <TokenInfoBalanceValue asset={asset} />
             </TokenInfoItem>
             <TokenInfoItem
-              title={asset?.native?.balance.display ? 'Value' : ' '}
+              title={asset?.native?.balance?.display ? 'Value' : ' '}
               weight="bold"
             >
-              {asset?.native?.balance.display || ' '}
+              {asset?.native?.balance?.display || ' '}
             </TokenInfoItem>
           </TokenInfoRow>
         </TokenInfoSection>
